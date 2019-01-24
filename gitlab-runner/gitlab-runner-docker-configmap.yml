@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gitlab-docker-runner
+  namespace: gitlab
+data:
+  config.toml: |
+    concurrent = 4
+    check_interval = 1
+
+    [[runners]]
+      name = "gitlab-docker-runner"
+      url = "http://192.168.30.147:32071"
+      token = "rsSxwSjFxDVUQTwmj_ZY"
+      executor = "docker"
+      [runners.docker]
+        tls_verify = false
+        image = "python:3.5"
+        privileged = true
+        disable_cache = false
+        volumes = ["/cache"]
